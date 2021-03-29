@@ -1,0 +1,3 @@
+include ':localloglib'
+include ':app'
+rootProject.name = "LocalLogProject"
