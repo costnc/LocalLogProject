@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         LocalLog.d("lim.sung.jin", "testset1");
         LocalLog.d("lim.sung.jin", "testset2");
-        LocalLog.d("lim.sung.jin", "testset2");
+        LocalLog.d("lim.sung.jin", "testset3");
 
     }
 }
