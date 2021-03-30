@@ -6,7 +6,7 @@ support
 * save local log
   - support >= Build.VERSION_CODES.Q
   
-* default is disable release mode
+* default is disable release log
   - you can enable release log
 
 * targetSdkVersion 30
