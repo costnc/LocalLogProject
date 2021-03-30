@@ -12,7 +12,9 @@ class ApplicationClass : Application() {
         super.onCreate()
 
         val builder : LogFile.Builder = LogFile.Builder();
+        /* if want save log file : set file name*/
         builder.fileName("saveLogFile.txt")
+        /* if want save log file : set path*/
         builder.path("sub/sub")
 
         LocalLog
@@ -20,6 +22,10 @@ class ApplicationClass : Application() {
             /* if >= Build.VERSION_CODES.Q) : download folder save
                 cause -> Android 11 issue */
             .saveLogFile(builder.build())
+            /* if  want release mode log */
+            .enableReleaseLog(false)
+            /* if want save log with release */
+            .enableReleaseSaveFileLog(false)
 
     }
 
