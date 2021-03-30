@@ -9,6 +9,9 @@ support
 * default is disable release log
   - you can enable release log
 
+* use io.reactivex.rxjava3:rxandroid:3.0.0
+  - background thread > save log file in Order
+
 * targetSdkVersion 30
 * See the sample code -> app/src
 
