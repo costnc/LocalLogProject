@@ -73,5 +73,5 @@ Step 5. use Log
 ``` kotlin
 LocalLog.d("lim.sung.jin", "testset1");
 LocalLog.d("lim.sung.jin", "testset2");
-LocalLog.d("lim.sung.jin", "testset2");
+LocalLog.d("lim.sung.jin", "testset3");
 ```
