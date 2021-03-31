@@ -3,6 +3,7 @@
 
 support
 =============
+* Android Library
 * save local log
   - support >= Build.VERSION_CODES.JELLY_BEAN(16)
   - support >= Build.VERSION_CODES.Q(29)
