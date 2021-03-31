@@ -245,12 +245,13 @@ class LocalLog {
                     when(cursor!!.count) {
                         null, 0    -> return@use
                         else       -> {
-                            val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                            cursor.moveToFirst()
-                            if (cursor.getString(nameIndex).equals(fileName)){
-                                findUrl = ContentUris.withAppendedId(MediaStore.Downloads.EXTERNAL_CONTENT_URI,
-                                        cursor.getLong(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
-                                return@use
+                            while(cursor.moveToNext()) {
+                                val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                                if (cursor.getString(nameIndex).equals(fileName)) {
+                                    findUrl = ContentUris.withAppendedId(MediaStore.Downloads.EXTERNAL_CONTENT_URI,
+                                            cursor.getLong(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
+                                    return@use
+                                }
                             }
                         }
                     }
