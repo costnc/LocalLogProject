@@ -4,7 +4,9 @@
 support
 =============
 * save local log
-  - support >= Build.VERSION_CODES.Q and < Build.VERSION_CODES.Q
+  - suppoer >= Build.VERSION_CODES.JELLY_BEAN(16)
+  - support >= Build.VERSION_CODES.Q(29)
+  
   
 * default is disable release log
   - you can enable release log
