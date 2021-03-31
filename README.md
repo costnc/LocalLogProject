@@ -24,6 +24,7 @@ How to
 To get a Git project into your build:
 
 Step 1. Add the JitPack repository to your build file
+------------
 
 Add it in your root build.gradle at the end of repositories
 ``` gradle
@@ -35,12 +36,14 @@ allprojects {
 }
 ```
 Step 2. Add the dependency
+------------
 ``` gradle
 dependencies {
         implementation 'com.github.costnc:LocalLogProject:1.0.0'
 }
 ```
 Step 3. add application class
+------------
 ``` xml
 <application
         android:name=".ApplicationClass"
@@ -48,7 +51,7 @@ Step 3. add application class
 />
 ```
 Step 4. init LocalLog in application calss
-
+------------
 
 kotlin
 ``` Kotlin
@@ -96,7 +99,7 @@ public class MainAppliction extends Application {
 }
 ```
 Step 5. use Log
-
+------------
 
 kotlin
 ``` kotlin
