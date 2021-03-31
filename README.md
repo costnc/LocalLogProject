@@ -4,7 +4,7 @@
 support
 =============
 * save local log
-  - suppoer >= Build.VERSION_CODES.JELLY_BEAN(16)
+  - support >= Build.VERSION_CODES.JELLY_BEAN(16)
   - support >= Build.VERSION_CODES.Q(29)
   
   
@@ -48,6 +48,9 @@ Step 3. add application class
 />
 ```
 Step 4. init LocalLog in application calss
+
+
+kotlin
 ``` Kotlin
 class ApplicationClass : Application() {
 
@@ -74,9 +77,38 @@ class ApplicationClass : Application() {
     
 }
 ```
+
+
+java
+``` java
+public class MainAppliction extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+ 
+        LocalLog
+                .Companion.initialize(MainAppliction.this)
+                .saveLogFile(builder.build())
+                .enableReleaseLog(false)
+                .enableReleaseSaveFileLog(false);
+    }
+}
+```
 Step 5. use Log
+
+
+kotlin
 ``` kotlin
 LocalLog.d("lim.sung.jin", "testset1");
 LocalLog.d("lim.sung.jin", "testset2");
 LocalLog.d("lim.sung.jin", "testset3");
+```
+
+
+java
+``` java
+LocalLog.Companion.d("lim.sung.jin", "testset1");
+LocalLog.Companion.d("lim.sung.jin", "testset2");
+LocalLog.Companion.d("lim.sung.jin", "testset3");
 ```
