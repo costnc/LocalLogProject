@@ -40,7 +40,7 @@ Step 2. Add the dependency
 ------------
 ``` gradle
 dependencies {
-        implementation 'com.github.costnc:LocalLogProject:1.0.0'
+        implementation 'com.github.costnc:LocalLogProject:1.0.2'
 }
 ```
 Step 3. add application class
