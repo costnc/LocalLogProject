@@ -11,11 +11,15 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val builder : LogFile.Builder = LogFile.Builder();
+        val builder : LogFile.Builder = LogFile.Builder(applicationContext);
         /* if want save log file : set file name*/
         builder.fileName("saveLogFile.txt")
         /* if want save log file : set path*/
         builder.path("sub/sub")
+        /* if want trun date log file*/
+        builder.asTrunDate()
+        /* if want trun file size log file : byte */
+        //builder.trunLogFileSize = 1000
 
         LocalLog
             .initialize(applicationContext)

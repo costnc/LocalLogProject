@@ -12,12 +12,14 @@ import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
+import android.widget.Toast
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.log
 
 
@@ -58,12 +60,6 @@ class LocalLog {
 
         // date log format
         private var _logDateFormat : String = "yyyy-MM-dd HH:mm:ss";
-
-        // fileSize : truncation Log file
-        private var _trunLogFileSize : Long = -1;
-
-        // date : truncation Log file
-        private var _isTrunDate : Boolean = false;
 
         /**
          * init
@@ -106,21 +102,6 @@ class LocalLog {
          * @author lim.sung.jin
          */
         fun enableReleaseSaveFileLog(isEnable: Boolean) = apply { this._enableReleaseSaveFileLog = isEnable }
-
-        /**
-         * if want truncation file size
-         * @param Long   :   file size
-         * @since 2021.03.30
-         * @author lim.sung.jin
-         */
-        private fun asTrunLogFileSize(byteSize : Long) = apply {this._trunLogFileSize = byteSize}
-
-        /**
-         * if want truncation date
-         * @since 2021.03.30
-         * @author lim.sung.jin
-         */
-        private fun asTrunDate() = apply {this._isTrunDate = true}
 
         /**
          * debug
@@ -239,6 +220,7 @@ class LocalLog {
          */
         private fun findFileUri(contentResolver : ContentResolver, fileName : String) : Uri?{
             var findUrl : Uri? = null
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 contentResolver.query(MediaStore.Downloads.EXTERNAL_CONTENT_URI, null, null, null, null).use {
                     cursor ->
@@ -249,7 +231,7 @@ class LocalLog {
                                 val nameIndex = cursor!!.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                                 if (cursor.getString(nameIndex).equals(fileName)) {
                                     findUrl = ContentUris.withAppendedId(MediaStore.Downloads.EXTERNAL_CONTENT_URI,
-                                            cursor.getLong(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
+                                            cursor.getLong(cursor.getColumnIndex(MediaStore.DownloadColumns._ID)));
                                     return@use
                                 }
                             }
@@ -282,6 +264,11 @@ class LocalLog {
                             INFO -> printMsg = "[INFO]" + printMsg
                             WARN -> printMsg = "[WARN]" + printMsg
                             ERROR -> printMsg = "[ERROR]" + printMsg
+                        }
+
+                        // check trun date file
+                        if (_logFile!!.isTrunDate) {
+                            this._logFile!!.fileName = Util.getCheckTodayFile(this._logFile!!.fileName)
                         }
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -345,6 +332,17 @@ class LocalLog {
                     }
                 }
             }
+        }
+
+        /**
+         * get date file name
+         * @param fileName : fileName
+         * @return yyyyMMdd_fileName
+         */
+        fun getFileDateName(fileName : String) : String {
+            var simpleFormatter: SimpleDateFormat = SimpleDateFormat("yyyyMMdd");
+            var date: Date = Calendar.getInstance().getTime()
+            return simpleFormatter.format(date).toString() + "_" + fileName
         }
     }
 
