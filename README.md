@@ -8,7 +8,7 @@ support
   - support >= Build.VERSION_CODES.JELLY_BEAN(16)
   - support >= Build.VERSION_CODES.Q(29)
   
-  
+* log files by date  
 * default is disable release log
   - you can enable release log
 
@@ -40,7 +40,7 @@ Step 2. Add the dependency
 ------------
 ``` gradle
 dependencies {
-        implementation 'com.github.costnc:LocalLogProject:1.0.2'
+        implementation 'com.github.costnc:LocalLogProject:1.1.0'
 }
 ```
 Step 3. add application class
@@ -64,8 +64,10 @@ class ApplicationClass : Application() {
         val builder : LogFile.Builder = LogFile.Builder();
         /* if want save log file : set file name*/
         builder.fileName("saveLogFile.txt")
-        /* if want save log file : set path*/
+        /* if want save log file : set path, default is root folder*/
         builder.path("sub/sub")
+        /* if want log files by date */
+        builder.asTrunDate()
 
         LocalLog
             .initialize(applicationContext)
@@ -90,12 +92,25 @@ public class MainAppliction extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
- 
+        
+        LogFile.Builder builder = new LogFile.Builder(getApplicationContext());
+        /* if want save log file : set file name*/
+        builder.fileName("saveLogFile.txt");
+        /* if want save log file : set path, default is root folder*/
+        builder.path("sub/sub");
+        /* if want log files by date */
+        builder.asTrunDate();
+
         LocalLog
                 .Companion.initialize(MainAppliction.this)
+                /* if >= Build.VERSION_CODES.Q) : download folder save
+                cause -> Android 11 issue */
                 .saveLogFile(builder.build())
+                /* if  want release mode log */
                 .enableReleaseLog(false)
+                /* if want save log with release */
                 .enableReleaseSaveFileLog(false);
+                
     }
 }
 ```
