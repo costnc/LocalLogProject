@@ -55,7 +55,7 @@ class LogFile (
          * @since 2021.03.30
          * @author lim.sung.jin
          */
-        //fun asTrunLogFileSize(byteSize : Long) = apply {this.trunLogFileSize = byteSize}
+        fun asTrunLogFileSize(byteSize : Long) = apply {this.trunLogFileSize = byteSize}
 
         /**
          * if want truncation date

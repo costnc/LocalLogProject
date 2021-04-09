@@ -12,14 +12,14 @@ class ApplicationClass : Application() {
         super.onCreate()
 
         val builder : LogFile.Builder = LogFile.Builder(applicationContext);
-        /* if want save log file : set file name*/
-        builder.fileName("saveLogFile.txt")
-        /* if want save log file : set path*/
+        /* if want save log file : set file name */
+        builder.fileName("saveLogFile")
+        /* if want save log file : set path */
         builder.path("sub/sub")
-        /* if want trun date log file*/
+        /* if want log files by date */
         builder.asTrunDate()
-        /* if want trun file size log file : byte */
-        //builder.trunLogFileSize = 1000
+        /* if want log files by size(byte) */
+        builder.trunLogFileSize = 100
 
         LocalLog
             .initialize(applicationContext)
