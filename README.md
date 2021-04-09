@@ -9,6 +9,7 @@ support
   - support >= Build.VERSION_CODES.Q(29)
   
 * log files by date  
+* log files by size(byte)
 * default is disable release log
   - you can enable release log
 
@@ -40,7 +41,7 @@ Step 2. Add the dependency
 ------------
 ``` gradle
 dependencies {
-        implementation 'com.github.costnc:LocalLogProject:1.1.0'
+        implementation 'com.github.costnc:LocalLogProject:1.2.0'
 }
 ```
 Step 3. add application class
@@ -61,13 +62,15 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val builder : LogFile.Builder = LogFile.Builder();
-        /* if want save log file : set file name*/
-        builder.fileName("saveLogFile.txt")
-        /* if want save log file : set path, default is root folder*/
+        val builder : LogFile.Builder = LogFile.Builder(applicationContext);
+        /* if want save log file : set file name */
+        builder.fileName("saveLogFile")
+        /* if want save log file : set path */
         builder.path("sub/sub")
         /* if want log files by date */
         builder.asTrunDate()
+        /* if want log files by size(byte) */
+        builder.trunLogFileSize = 100
 
         LocalLog
             .initialize(applicationContext)
@@ -95,7 +98,9 @@ public class MainAppliction extends Application {
         
         LogFile.Builder builder = new LogFile.Builder(getApplicationContext());
         /* if want save log file : set file name*/
-        builder.fileName("saveLogFile.txt");
+        builder.fileName("saveLogFile");
+        /* if want log files by size(byte) */
+        builder.asTrunLogFileSize(100);
         /* if want save log file : set path, default is root folder*/
         builder.path("sub/sub");
         /* if want log files by date */
